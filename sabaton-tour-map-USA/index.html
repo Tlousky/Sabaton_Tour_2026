@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabaton - Legends on Tour 2026 USA Map</title>
+    <meta name="description" content="Explore Sabaton's November-December 2026 USA tour route with this interactive heavy-metal themed tour map, featuring concert dates, venues, tickets, and directions.">
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Sabaton - Legends on Tour 2026 USA Map">
+    <meta property="og:description" content="Explore Sabaton's USA tour route with this interactive heavy-metal themed tour map, featuring concert dates, venues, tickets, and directions.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.sabaton.net/wp-content/uploads/2024/07/sabaton-tour-opengraph-1200x630-1.jpg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Brand / Header -->
+            <header class="app-header">
+                <div class="logo-area">
+                    <span class="logo-sub">LEGENDS ON TOUR</span>
+                    <h1 class="logo-main">SABATON</h1>
+                    <span class="logo-date">USA &bull; NOV-DEC 2026</span>
+                </div>
+            </header>
+
+            <!-- Autoplay Cinematic Controls -->
+            <section class="autoplay-panel">
+                <div class="panel-title">
+                    <i class="fa-solid fa-play-circle yellow-text"></i>
+                    <h2>Tour Cinematic Autoplay</h2>
+                </div>
+                <div class="control-row">
+                    <button id="btn-autoplay" class="btn btn-gold" title="Start cinematic path travel">
+                        <i class="fa-solid fa-play"></i> Start Journey
+                    </button>
+                    <button id="btn-pause" class="btn btn-secondary" disabled title="Pause cinematic autoplay">
+                        <i class="fa-solid fa-pause"></i> Pause
+                    </button>
+                </div>
+                <div class="speed-row">
+                    <label for="speed-range">Speed:</label>
+                    <input type="range" id="speed-range" min="1500" max="6000" step="500" value="3000">
+                    <span id="speed-label">3.0s</span>
+                </div>
+            </section>
+
+            <!-- Statistics Panel -->
+            <section class="stats-panel">
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-shows">25</span>
+                    <span class="stat-lbl">Concerts</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-states">19</span>
+                    <span class="stat-lbl">States</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-distance">--</span>
+                    <span class="stat-lbl">Est. Miles</span>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters-panel">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Search city or venue...">
+                </div>
+                <div class="filter-controls">
+                    <select id="state-filter">
+                        <option value="">All States</option>
+                        <!-- States will be populated dynamically -->
+                    </select>
+                    <button id="btn-reset-filters" class="btn btn-secondary btn-icon" title="Reset Filters">
+                        <i class="fa-solid fa-undo"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Driving Routes / Google Maps Multi-stop links -->
+            <section class="google-routes-panel">
+                <div class="panel-title">
+                    <i class="fa-solid fa-route yellow-text"></i>
+                    <h2>Open Tour in Google Maps</h2>
+                </div>
+                <p class="section-desc">Google Maps limits directions to 10 stops. We've split the 25-stop tour into 3 route legs:</p>
+                <div class="route-links">
+                    <a href="https://www.google.com/maps/dir/Dallas,+TX/Houston,+TX/San+Antonio,+TX/Phoenix,+AZ/Los+Angeles,+CA/Wheatland,+CA/Salt+Lake+City,+UT/Loveland,+CO" 
+                       target="_blank" class="btn-route-link" id="google-route-leg1">
+                        <i class="fa-solid fa-map-location-dot"></i> Leg 1: Southwest (Stops 1-8)
+                    </a>
+                    <a href="https://www.google.com/maps/dir/Loveland,+CO/Omaha,+NE/Milwaukee,+WI/Minneapolis,+MN/Chicago,+IL/Des+Moines,+IA/St.+Louis,+MO/Cincinnati,+OH/Detroit,+MI" 
+                       target="_blank" class="btn-route-link" id="google-route-leg2">
+                        <i class="fa-solid fa-map-location-dot"></i> Leg 2: Midwest (Stops 8-16)
+                    </a>
+                    <a href="https://www.google.com/maps/dir/Detroit,+MI/Boston,+MA/Philadelphia,+PA/Pittsburgh,+PA/Virginia+Beach,+VA/National+Harbor,+MD/Atlanta,+GA/Nashville,+TN/Orlando,+FL/Fort+Lauderdale,+FL" 
+                       target="_blank" class="btn-route-link" id="google-route-leg3">
+                        <i class="fa-solid fa-map-location-dot"></i> Leg 3: East & South (Stops 16-25)
+                    </a>
+                </div>
+            </section>
+
+            <!-- Scrollable Tour Date List -->
+            <div class="tour-list-container">
+                <div class="tour-list-header">
+                    <span>Chronological Schedule</span>
+                    <span id="filtered-count" class="count-badge">25 shows</span>
+                </div>
+                <div id="tour-list" class="tour-list">
+                    <!-- Tour cards populated dynamically by app.js -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Map Container -->
+        <main class="map-wrapper">
+            <!-- Fullscreen map div -->
+            <div id="map"></div>
+            
+            <!-- Map Overlay Legend -->
+            <div class="map-overlay-card">
+                <h3>Legends on Tour 2026</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-dot start-dot"></span>
+                        <span>Tour Start (Dallas)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot middle-dot"></span>
+                        <span>Tour Stops</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot end-dot"></span>
+                        <span>Tour Finale (Ft. Lauderdale)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS Library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Tour Data Source -->
+    <script src="data.js"></script>
+    <!-- Custom Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>

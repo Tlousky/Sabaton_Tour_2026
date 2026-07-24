@@ -1,0 +1,932 @@
+/* ==========================================================================
+   Design System & Variable Declarations
+   ========================================================================== */
+:root {
+    /* Color Palette */
+    --color-bg-dark: #121214;
+    --color-sidebar-bg: #1a1a1f;
+    --color-card-bg: rgba(30, 30, 36, 0.65);
+    --color-card-active-bg: rgba(46, 46, 56, 0.85);
+    --color-gold: #f1c40f;
+    --color-gold-hover: #f39c12;
+    --color-gold-glow: rgba(241, 196, 15, 0.4);
+    --color-text-primary: #f5f5f7;
+    --color-text-secondary: #a0a0ab;
+    --color-text-dark: #121214;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-focus: rgba(241, 196, 15, 0.5);
+    --color-red-badge: #e74c3c;
+    --color-red-glow: rgba(231, 76, 60, 0.4);
+    
+    /* Fonts */
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Poppins', sans-serif;
+    
+    /* Layout */
+    --sidebar-width: 420px;
+    --transition-speed: 0.25s;
+    --border-radius: 12px;
+}
+
+/* ==========================================================================
+   Global Reset & Base Styles
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+}
+
+a {
+    color: var(--color-gold);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--color-gold-hover);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold);
+}
+
+/* ==========================================================================
+   App Layout
+   ========================================================================== */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+/* ==========================================================================
+   Sidebar Styles
+   ========================================================================== */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--color-sidebar-bg);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 10;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+}
+
+/* Sidebar App Header */
+.app-header {
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: var(--color-gold);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.logo-main {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--color-text-primary);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), 
+                 0 0 1px rgba(255,255,255,0.2);
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.logo-date {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+/* Common Panels */
+.autoplay-panel,
+.stats-panel,
+.filters-panel,
+.google-routes-panel {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.panel-title h2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+}
+
+.yellow-text {
+    color: var(--color-gold);
+}
+
+.section-desc {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+/* Autoplay Panel */
+.autoplay-panel .control-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.autoplay-panel .speed-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.autoplay-panel .speed-row input[type="range"] {
+    flex-grow: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.autoplay-panel .speed-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s;
+}
+
+.autoplay-panel .speed-row input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.autoplay-panel .speed-row span {
+    font-family: monospace;
+    color: var(--color-gold);
+    font-weight: bold;
+    min-width: 35px;
+}
+
+/* Stats Panel */
+.stats-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+}
+
+.stat-val {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    text-shadow: 0 0 10px var(--color-gold-glow);
+}
+
+.stat-lbl {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+}
+
+/* Filters Panel */
+.filters-panel {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 12px 10px 38px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    color: var(--color-text-primary);
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    transition: all var(--transition-speed);
+}
+
+.search-box input:focus {
+    border-color: var(--color-gold);
+    background-color: rgba(0, 0, 0, 0.4);
+    outline: none;
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.15);
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-controls select {
+    flex-grow: 1;
+    padding: 10px 12px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    color: var(--color-text-primary);
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-controls select:focus {
+    border-color: var(--color-gold);
+}
+
+/* Google Routes Panel */
+.google-routes-panel .route-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn-route-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    color: var(--color-text-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all var(--transition-speed);
+    text-align: left;
+}
+
+.btn-route-link i {
+    color: var(--color-gold);
+    font-size: 1rem;
+    transition: transform var(--transition-speed);
+}
+
+.btn-route-link:hover {
+    background-color: rgba(241, 196, 15, 0.08);
+    border-color: var(--color-gold);
+}
+
+.btn-route-link:hover i {
+    transform: scale(1.15);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.btn-gold {
+    background-color: var(--color-gold);
+    color: var(--color-text-dark);
+}
+
+.btn-gold:hover {
+    background-color: var(--color-gold-hover);
+    box-shadow: 0 0 15px var(--color-gold-glow);
+    transform: translateY(-1px);
+}
+
+.btn-gold:active {
+    transform: translateY(0);
+}
+
+.btn-gold:disabled {
+    background-color: rgba(241, 196, 15, 0.4);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-text-secondary);
+}
+
+.btn-secondary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    width: 40px;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+/* Tour List Panel */
+.tour-list-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tour-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.count-badge {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+}
+
+.tour-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tour Cards */
+.tour-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.tour-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: transparent;
+    transition: background-color var(--transition-speed);
+}
+
+.tour-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    background: rgba(46, 46, 56, 0.5);
+}
+
+.tour-card.active {
+    background: var(--color-card-active-bg);
+    border-color: var(--color-gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+.tour-card.active::before {
+    background-color: var(--color-gold);
+}
+
+.tour-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.tour-card-num-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tour-seq {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+}
+
+.tour-card.active .tour-seq {
+    background-color: var(--color-gold);
+    color: var(--color-text-dark);
+}
+
+.tour-date-txt {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.state-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.tour-card.active .state-badge {
+    background-color: rgba(241, 196, 15, 0.15);
+    color: var(--color-gold);
+}
+
+.tour-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tour-venue-name {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.tour-city-name {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+.tour-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.btn-ticket {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.btn-card-dir {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color var(--transition-speed);
+}
+
+.btn-card-dir:hover {
+    color: var(--color-gold);
+}
+
+/* ==========================================================================
+   Map Wrapper & Leaflet Styles
+   ========================================================================== */
+.map-wrapper {
+    flex-grow: 1;
+    position: relative;
+    height: 100%;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    background-color: #191a1a; /* Background matches dark tiles */
+}
+
+/* Custom overlay card on map */
+.map-overlay-card {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(26, 26, 31, 0.85);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    width: 250px;
+}
+
+.map-overlay-card h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-gold);
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 6px;
+}
+
+.legend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.start-dot {
+    background-color: var(--color-gold);
+    box-shadow: 0 0 6px var(--color-gold);
+    border: 2px solid #fff;
+}
+
+.middle-dot {
+    background-color: #34495e;
+    border: 2px solid var(--color-gold);
+}
+
+.end-dot {
+    background-color: var(--color-red-badge);
+    box-shadow: 0 0 6px var(--color-red-badge);
+    border: 2px solid #fff;
+}
+
+/* Custom Map Marker Icon */
+.custom-map-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.marker-pin {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #111;
+    border: 2.5px solid var(--color-gold);
+    color: var(--color-gold);
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+/* Start/End marker variations */
+.marker-pin.start-pin {
+    border-color: #ffffff;
+    background: var(--color-gold);
+    color: var(--color-text-dark);
+    box-shadow: 0 0 15px var(--color-gold-glow);
+}
+
+.marker-pin.end-pin {
+    border-color: #ffffff;
+    background: var(--color-red-badge);
+    color: #ffffff;
+    box-shadow: 0 0 15px var(--color-red-glow);
+}
+
+/* Active Marker Glowing Effect */
+.marker-pin.active-pin {
+    transform: scale(1.3);
+    border-color: #ffffff;
+    background-color: var(--color-gold);
+    color: var(--color-text-dark);
+    box-shadow: 0 0 20px var(--color-gold);
+    z-index: 9999 !important;
+}
+
+/* Animated pulsing aura behind active pin */
+.marker-pulse-ring {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--color-gold);
+    border-radius: 50%;
+    animation: marker-pulse 1.5s ease-out infinite;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+}
+
+.marker-pulse-ring.end-pulse {
+    border-color: var(--color-red-badge);
+}
+
+@keyframes marker-pulse {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Animated flowing tour route path */
+.flowing-route {
+    stroke-dasharray: 8, 12;
+    animation: route-flow 25s linear infinite;
+}
+
+@keyframes route-flow {
+    from {
+        stroke-dashoffset: 400;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Customizing Leaflet Popups for Metal Theme */
+.leaflet-popup-content-wrapper {
+    background: rgba(26, 26, 31, 0.95) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--border-radius) !important;
+    color: var(--color-text-primary) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-tip {
+    background: rgba(26, 26, 31, 0.95) !important;
+    border-left: 1px solid var(--color-border) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+}
+
+.leaflet-popup-content {
+    margin: 12px 16px !important;
+    font-family: var(--font-body) !important;
+    line-height: 1.4 !important;
+}
+
+/* Popup Inner Elements */
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+
+.popup-date {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-gold);
+}
+
+.popup-seq {
+    font-size: 0.65rem;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+.popup-venue {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.popup-city {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+}
+
+.popup-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.popup-actions .btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+    border-radius: 6px;
+}
+
+/* Custom Zoom Control Styling */
+.leaflet-bar {
+    border: 1px solid var(--color-border) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden;
+}
+
+.leaflet-bar a {
+    background-color: var(--color-sidebar-bg) !important;
+    color: var(--color-text-primary) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    transition: all var(--transition-speed) !important;
+}
+
+.leaflet-bar a:hover {
+    background-color: var(--color-gold) !important;
+    color: var(--color-text-dark) !important;
+}
+
+/* ==========================================================================
+   Responsive Design / Media Queries
+   ========================================================================== */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column-reverse;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 55vh;
+        border-right: none;
+        border-top: 1px solid var(--color-border);
+    }
+    
+    .map-wrapper {
+        height: 45vh;
+    }
+    
+    .map-overlay-card {
+        top: 12px;
+        bottom: auto;
+        right: 12px;
+        padding: 8px 12px;
+        width: auto;
+        max-width: 200px;
+        font-size: 0.65rem;
+    }
+    
+    .map-overlay-card h3 {
+        font-size: 0.75rem;
+        margin-bottom: 6px;
+        padding-bottom: 3px;
+    }
+    
+    .map-overlay-card .legend-item {
+        font-size: 0.65rem;
+        gap: 6px;
+    }
+    
+    .app-header {
+        padding: 12px;
+    }
+    
+    .logo-main {
+        font-size: 1.6rem;
+    }
+    
+    .autoplay-panel, .stats-panel, .filters-panel, .google-routes-panel {
+        padding: 10px 16px;
+    }
+    
+    .tour-list {
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        height: 60vh;
+    }
+    
+    .map-wrapper {
+        height: 40vh;
+    }
+    
+    .stats-panel {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .google-routes-panel {
+        display: none; /* Hide multi-stop routes on tiny screens to save space */
+    }
+}

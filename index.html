@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabaton - Legends on Tour 2026 | North America</title>
+    <meta name="description" content="Explore Sabaton's September–December 2026 North American tour route across Canada and the USA with interactive maps, concert schedules, and tickets.">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Sabaton - Legends on Tour 2026 | North America Map">
+    <meta property="og:description" content="Interactive maps of Sabaton's 2026 tour legs in Canada and the United States.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.sabaton.net/wp-content/uploads/2024/07/sabaton-tour-opengraph-1200x630-1.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bg-dark: #09090b;
+            --color-header-bg: #111115;
+            --color-gold: #e8b800;
+            --color-gold-hover: #f5c842;
+            --color-gold-glow: rgba(232, 184, 0, 0.3);
+            --color-maple: #d63a1f;
+            --color-maple-glow: rgba(214, 58, 31, 0.35);
+            --color-text-primary: #f0f0f4;
+            --color-text-secondary: #8a8a9a;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-primary);
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header & Tabs Bar */
+        .app-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(180deg, #16161c 0%, #0d0d10 100%);
+            border-bottom: 2px solid var(--color-gold);
+            padding: 10px 24px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            flex-shrink: 0;
+        }
+
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            color: var(--color-text-primary);
+            text-shadow: 0 0 16px var(--color-gold-glow);
+            line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 12px;
+        }
+
+        .tab-btn {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--color-border);
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: var(--color-text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(232, 184, 0, 0.4);
+            box-shadow: 0 0 10px var(--color-gold-glow);
+        }
+
+        .tab-btn.active[data-tab="canada"] {
+            color: #fff;
+            background: linear-gradient(135deg, var(--color-maple) 0%, #b02a12 100%);
+            border-color: var(--color-maple);
+            box-shadow: 0 0 15px var(--color-maple-glow);
+        }
+
+        .tab-btn.active[data-tab="usa"] {
+            color: #000;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c9960a 100%);
+            border-color: var(--color-gold);
+            box-shadow: 0 0 15px var(--color-gold-glow);
+        }
+
+        /* Content Area */
+        .content-container {
+            flex: 1;
+            position: relative;
+            background-color: var(--color-bg-dark);
+        }
+
+        .tab-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .tab-panel.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: var(--color-bg-dark);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .app-header-bar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px;
+                text-align: center;
+            }
+
+            .brand-container {
+                align-items: center;
+            }
+
+            .tab-btn {
+                padding: 6px 14px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header bar with branding and tabs -->
+    <header class="app-header-bar">
+        <div class="brand-container">
+            <span class="brand-title">SABATON</span>
+            <span class="brand-subtitle">Legends on Tour 2026</span>
+        </div>
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="canada">
+                <i class="fa-solid fa-leaf" style="color: #ff5a5a;"></i> Canada Leg
+            </button>
+            <button class="tab-btn" data-tab="usa">
+                <i class="fa-solid fa-star" style="color: #ffcc00;"></i> USA Leg
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Panels -->
+    <main class="content-container">
+        <!-- Canada Tab Content -->
+        <div class="tab-panel active" id="panel-canada">
+            <iframe src="sabaton-tour-map-CANADA/index.html"></iframe>
+        </div>
+
+        <!-- USA Tab Content -->
+        <div class="tab-panel" id="panel-usa">
+            <iframe src="sabaton-tour-map-USA/index.html"></iframe>
+        </div>
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update panels
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            const targetPanel = document.getElementById('panel-' + tabId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+                
+                // Force leaflet map in iframe to resize/redraw
+                const iframe = targetPanel.querySelector('iframe');
+                if (iframe && iframe.contentWindow) {
+                    try {
+                        // Dispatch window resize inside iframe to force Leaflet's invalidateSize/resize logic
+                        iframe.contentWindow.dispatchEvent(new Event('resize'));
+                    } catch (e) {
+                        console.warn("Could not dispatch resize event to iframe", e);
+                    }
+                }
+            }
+        }
+
+        // Attach event listeners to tab buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                switchTab(tabId);
+            });
+        });
+    </script>
+</body>
+</html>

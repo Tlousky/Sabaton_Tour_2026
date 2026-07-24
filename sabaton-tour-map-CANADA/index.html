@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabaton - Legends on Tour 2026 | Sep–Oct Canada & USA Map</title>
+    <meta name="description" content="Explore Sabaton's September–October 2026 Canada & USA tour route – 11 stops across Louisville, Halifax, Montreal, Ottawa, Toronto, Thunder Bay, Winnipeg, Edmonton, Calgary, and Vancouver.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sabaton - Legends on Tour 2026 | Sep–Oct Map">
+    <meta property="og:description" content="Interactive map of Sabaton's Sep–Oct 2026 Canada & USA tour leg.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.sabaton.net/wp-content/uploads/2024/07/sabaton-tour-opengraph-1200x630-1.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Header / Brand -->
+            <header class="app-header">
+                <div class="logo-area">
+                    <span class="logo-sub">Legends on Tour</span>
+                    <h1 class="logo-main">SABATON</h1>
+                    <span class="logo-date">Canada &amp; USA &bull; Sep–Oct 2026</span>
+                    <span class="tour-name-badge">🍁 The Canada Leg</span>
+                </div>
+            </header>
+
+            <!-- Stats -->
+            <section class="stats-panel">
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-shows">11</span>
+                    <span class="stat-lbl">Concerts</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-cities">10</span>
+                    <span class="stat-lbl">Cities</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val" id="stat-distance">--</span>
+                    <span class="stat-lbl">Est. Miles</span>
+                </div>
+            </section>
+
+            <!-- Autoplay Controls -->
+            <section class="autoplay-panel">
+                <div class="panel-title">
+                    <i class="fa-solid fa-play-circle yellow-text"></i>
+                    <h2>Tour Cinematic Autoplay</h2>
+                </div>
+                <div class="control-row">
+                    <button id="btn-autoplay" class="btn btn-gold" title="Start cinematic tour">
+                        <i class="fa-solid fa-play"></i> Start Journey
+                    </button>
+                    <button id="btn-pause" class="btn btn-secondary" disabled title="Pause autoplay">
+                        <i class="fa-solid fa-pause"></i> Pause
+                    </button>
+                </div>
+                <div class="speed-row">
+                    <label for="speed-range">Speed:</label>
+                    <input type="range" id="speed-range" min="1500" max="6000" step="500" value="3000">
+                    <span id="speed-label">3.0s</span>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters-panel">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Search city or venue...">
+                </div>
+                <div class="country-tabs" id="country-tabs">
+                    <span class="country-tab active" data-country="">All</span>
+                    <span class="country-tab usa-tab" data-country="United States">🇺🇸 USA</span>
+                    <span class="country-tab canada-tab" data-country="Canada">🍁 Canada</span>
+                </div>
+                <div class="filter-controls">
+                    <button id="btn-reset-filters" class="btn btn-secondary btn-icon" title="Reset Filters">
+                        <i class="fa-solid fa-undo"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Google Maps Route Links -->
+            <section class="google-routes-panel">
+                <div class="panel-title">
+                    <i class="fa-solid fa-route yellow-text"></i>
+                    <h2>Open Tour in Google Maps</h2>
+                </div>
+                <p class="section-desc">11 stops split into 2 driving legs for Google Maps:</p>
+                <div class="route-links">
+                    <a href="https://www.google.com/maps/dir/Louisville,+KY/Halifax,+Nova+Scotia/Laval,+Quebec/Ottawa,+Ontario/Toronto,+Ontario/Thunder+Bay,+Ontario"
+                       target="_blank" class="btn-route-link" id="google-route-leg1">
+                        <i class="fa-solid fa-map-location-dot"></i> Leg 1: Louisville → Thunder Bay (Stops 1–6)
+                    </a>
+                    <a href="https://www.google.com/maps/dir/Thunder+Bay,+Ontario/Winnipeg,+Manitoba/Edmonton,+Alberta/Calgary,+Alberta/Vancouver,+British+Columbia"
+                       target="_blank" class="btn-route-link" id="google-route-leg2">
+                        <i class="fa-solid fa-map-location-dot"></i> Leg 2: Thunder Bay → Vancouver (Stops 6–11)
+                    </a>
+                </div>
+            </section>
+
+            <!-- Tour List -->
+            <div class="tour-list-container">
+                <div class="tour-list-header">
+                    <span>Chronological Schedule</span>
+                    <span id="filtered-count" class="count-badge">11 shows</span>
+                </div>
+                <div id="tour-list" class="tour-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Map -->
+        <main class="map-wrapper">
+            <div id="map"></div>
+
+            <!-- Legend -->
+            <div class="map-overlay-card">
+                <h3>Legends on Tour 2026</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-dot usa-dot"></span>
+                        <span>USA Stop (Louisville)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot canada-dot"></span>
+                        <span>Canada Stops</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot end-dot"></span>
+                        <span>Tour Finale (Vancouver)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Tour Data -->
+    <script src="data.js"></script>
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
