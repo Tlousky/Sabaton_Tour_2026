@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAutoplayRunning = false;
     let currentAutoplaySpeed = 3000;
     let activeCountryFilter = '';
+    let currentFilteredData = [];
 
     // =========================================================================
     // Leaflet Map Init
@@ -59,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize App
     // =========================================================================
     function initializeTourApp() {
+        currentFilteredData = [...tourData];
         // Stats
         statShows.textContent = tourData.length;
         const uniqueCities = new Set(tourData.map(e => e.City));
@@ -275,6 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return matchesText && matchesCountry;
         });
 
+        currentFilteredData = filtered;
+
         // Show/hide markers
         tourData.forEach((event, i) => {
             const isMatch = filtered.some(e => e.DateStr === event.DateStr && e.Venue === event.Venue);
@@ -379,4 +383,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return total;
     }
+
+    // Auto-fit bounds on window resize with a debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            map.invalidateSize();
+            fitMapBounds(currentFilteredData);
+        }, 250);
+    });
 });

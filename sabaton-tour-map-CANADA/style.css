@@ -800,3 +800,195 @@ a:hover { color: var(--color-gold-hover); }
 }
 
 .leaflet-control-attribution a { color: rgba(255,255,255,0.5) !important; }
+
+/* ==========================================================================
+   Responsive Design / Media Queries
+   ========================================================================== */
+@media (max-width: 768px) and (orientation: portrait) {
+    .app-container {
+        flex-direction: column-reverse;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 55vh;
+        border-right: none;
+        border-top: 1px solid var(--color-border);
+    }
+    
+    .map-wrapper {
+        height: 45vh;
+    }
+    
+    .map-overlay-card {
+        top: 12px;
+        bottom: auto;
+        right: 12px;
+        padding: 8px 12px;
+        width: auto;
+        max-width: 200px;
+        font-size: 0.65rem;
+    }
+    
+    .map-overlay-card h3 {
+        font-size: 0.75rem;
+        margin-bottom: 6px;
+        padding-bottom: 3px;
+    }
+    
+    .map-overlay-card .legend-item {
+        font-size: 0.65rem;
+        gap: 6px;
+    }
+    
+    .app-header {
+        padding: 12px;
+    }
+    
+    .logo-main {
+        font-size: 1.6rem;
+    }
+    
+    .autoplay-panel, .stats-panel, .filters-panel, .google-routes-panel {
+        padding: 10px 16px;
+    }
+    
+    .tour-list {
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+    .sidebar {
+        height: 60vh;
+    }
+    
+    .map-wrapper {
+        height: 40vh;
+    }
+    
+    .google-routes-panel {
+        display: none; /* Hide multi-stop routes on tiny screens to save space */
+    }
+}
+
+@media (max-height: 550px) and (orientation: landscape) {
+    .sidebar {
+        width: 320px;
+        height: 100%;
+        border-right: 1px solid var(--color-border);
+        border-top: none;
+    }
+    
+    .app-container {
+        flex-direction: row;
+    }
+    
+    .map-wrapper {
+        height: 100%;
+    }
+    
+    .app-header {
+        padding: 8px 12px;
+    }
+    
+    .logo-main {
+        font-size: 1.4rem;
+    }
+    
+    .logo-sub {
+        font-size: 0.55rem;
+        margin-bottom: 1px;
+    }
+    
+    .logo-date {
+        font-size: 0.6rem;
+        margin-top: 2px;
+    }
+    
+    .tour-name-badge {
+        margin-top: 4px;
+        padding: 2px 8px;
+        font-size: 0.55rem;
+    }
+    
+    .stat-val {
+        font-size: 1.1rem;
+    }
+    
+    .stat-lbl {
+        font-size: 0.5rem;
+    }
+    
+    .autoplay-panel {
+        padding: 6px 12px;
+    }
+    
+    .panel-title {
+        margin-bottom: 4px;
+    }
+    
+    .control-row {
+        margin-bottom: 4px;
+    }
+    
+    .btn {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+    }
+    
+    .filters-panel {
+        padding: 8px 12px;
+        gap: 6px;
+    }
+    
+    .search-box input {
+        padding: 6px 10px 6px 26px;
+        font-size: 0.75rem;
+    }
+    
+    .country-tab {
+        padding: 3px 8px;
+        font-size: 0.6rem;
+    }
+    
+    .google-routes-panel {
+        display: none; /* Hide multi-stop route links on short landscape screens */
+    }
+    
+    .tour-list-header {
+        padding: 6px 12px;
+        font-size: 0.65rem;
+    }
+    
+    .tour-list {
+        padding: 4px;
+        gap: 4px;
+    }
+    
+    .tour-card {
+        padding: 8px;
+    }
+    
+    .tour-card-body {
+        margin-bottom: 6px;
+    }
+    
+    .map-overlay-card {
+        bottom: 12px;
+        right: 12px;
+        padding: 8px 12px;
+        min-width: 150px;
+    }
+    
+    .map-overlay-card h3 {
+        font-size: 0.65rem;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+    }
+    
+    .legend-item {
+        font-size: 0.6rem;
+        gap: 6px;
+    }
+}

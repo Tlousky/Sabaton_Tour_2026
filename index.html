@@ -182,6 +182,28 @@
                 font-size: 0.75rem;
             }
         }
+
+        /* Landscape Mobile Optimization */
+        @media (max-height: 550px) and (orientation: landscape) {
+            .app-header-bar {
+                flex-direction: row;
+                padding: 6px 16px;
+                gap: 8px;
+            }
+
+            .brand-title {
+                font-size: 1.2rem;
+            }
+
+            .brand-subtitle {
+                font-size: 0.55rem;
+            }
+
+            .tab-btn {
+                padding: 5px 12px;
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
 <body>

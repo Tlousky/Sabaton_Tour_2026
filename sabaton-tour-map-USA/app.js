@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoplayInterval = null;
     let isAutoplayRunning = false;
     let currentAutoplaySpeed = 3000; // ms per stop
+    let currentFilteredData = [];
 
     // Leaflet Map instance
     const map = L.map('map', {
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initializeTourApp() {
+        currentFilteredData = [...tourData];
         // 1. Populate UI Stats
         statShows.textContent = tourData.length;
         
@@ -329,6 +331,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Re-render sidebar cards
         renderTourList(filtered);
+
+        currentFilteredData = filtered;
+
+        if (filtered.length > 0 && filtered.length < tourData.length) {
+            fitMapBounds(filtered);
+        } else if (filtered.length === tourData.length) {
+            fitMapBounds(tourData);
+        }
     }
 
     function resetFilters() {
@@ -433,4 +443,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return total;
     }
+
+    // Auto-fit bounds on window resize with a debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            map.invalidateSize();
+            fitMapBounds(currentFilteredData);
+        }, 250);
+    });
 });
