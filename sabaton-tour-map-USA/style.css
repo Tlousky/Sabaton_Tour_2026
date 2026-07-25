@@ -465,6 +465,7 @@ a:hover {
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+    flex-shrink: 0;
 }
 
 .tour-card::before {
@@ -869,6 +870,17 @@ a:hover {
         height: 55vh;
         border-right: none;
         border-top: 1px solid var(--color-border);
+        overflow-y: auto;
+    }
+    
+    .tour-list-container {
+        flex: none;
+        overflow: visible;
+    }
+    
+    .tour-list {
+        overflow-y: visible;
+        flex: none;
     }
     
     .map-wrapper {
