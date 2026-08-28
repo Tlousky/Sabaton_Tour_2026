@@ -1,14 +1,5 @@
 const TOUR_DATA = [
   {
-    "DateStr": "17 Sep 2026",
-    "Country": "United States",
-    "City": "Louisville, Kentucky",
-    "Venue": "Louder Than Life Festival 2026",
-    "Tickets": "https://on.louderthanlifefestival.com/trk/sabaton",
-    "Latitude": 38.2542376,
-    "Longitude": -85.759407
-  },
-  {
     "DateStr": "23 Sep 2026",
     "Country": "Canada",
     "City": "Halifax, Nova Scotia",

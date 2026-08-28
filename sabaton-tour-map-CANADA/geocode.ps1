@@ -1,5 +1,4 @@
-﻿$venues = @(
-    @{ DateStr="17 Sep 2026"; City="Louisville, Kentucky"; Country="United States"; Venue="Louder Than Life Festival 2026"; Tickets="https://on.louderthanlifefestival.com/trk/sabaton"; Query="Louisville, Kentucky, USA" },
+$venues = @(
     @{ DateStr="23 Sep 2026"; City="Halifax, Nova Scotia"; Country="Canada"; Venue="Scotiabank Centre"; Tickets="https://ticketmaster.evyy.net/c/2868897/264167/4272?subId1=halifax&subId2=legends-on-tour&u=https%3A%2F%2Fwww.ticketmaster.ca%2Fevent%2F3100632BC75633EB"; Query="Halifax, Nova Scotia, Canada" },
     @{ DateStr="25 Sep 2026"; City="Laval, Quebec"; Country="Canada"; Venue="Place Bell"; Tickets="https://ticketmaster.evyy.net/c/2868897/264167/4272?subId1=laval&subId2=legends-on-tour&u=https%3A%2F%2Fwww.ticketmaster.ca%2Fevent%2F31006329B7123161"; Query="Laval, Quebec, Canada" },
     @{ DateStr="26 Sep 2026"; City="Ottawa, Ontario"; Country="Canada"; Venue="History Ottawa"; Tickets="https://ticketmaster.evyy.net/c/2868897/264167/4272?subId1=ottawa&subId2=legends-on-tour&u=https%3A%2F%2Fwww.ticketmaster.ca%2Fevent%2F31006472AC4F6A88"; Query="Ottawa, Ontario, Canada" },

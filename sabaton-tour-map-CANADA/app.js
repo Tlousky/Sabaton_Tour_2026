@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoplayInterval = null;
     let isAutoplayRunning = false;
     let currentAutoplaySpeed = 3000;
-    let activeCountryFilter = '';
     let currentFilteredData = [];
 
     // =========================================================================
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const statShows         = document.getElementById('stat-shows');
     const statCities        = document.getElementById('stat-cities');
     const statDistance      = document.getElementById('stat-distance');
-    const countryTabs       = document.querySelectorAll('.country-tab');
 
     // =========================================================================
     // Load Data
@@ -80,15 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btnAutoplay.addEventListener('click', startAutoplay);
         btnPause.addEventListener('click', pauseAutoplay);
         speedRange.addEventListener('input', handleSpeedChange);
-
-        countryTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                countryTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                activeCountryFilter = tab.dataset.country;
-                handleFilterChange();
-            });
-        });
     }
 
     // =========================================================================
@@ -273,8 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchesText = event.City.toLowerCase().includes(query) ||
                                 event.Venue.toLowerCase().includes(query) ||
                                 event.DateStr.toLowerCase().includes(query);
-            const matchesCountry = !activeCountryFilter || event.Country === activeCountryFilter;
-            return matchesText && matchesCountry;
+            return matchesText;
         });
 
         currentFilteredData = filtered;
@@ -307,9 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetFilters() {
         searchInput.value = '';
-        activeCountryFilter = '';
-        countryTabs.forEach(t => t.classList.remove('active'));
-        document.querySelector('.country-tab[data-country=""]').classList.add('active');
         handleFilterChange();
         fitMapBounds(tourData);
     }

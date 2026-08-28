@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sabaton - Legends on Tour 2026 | Sep–Oct Canada & USA Map</title>
-    <meta name="description" content="Explore Sabaton's September–October 2026 Canada & USA tour route – 11 stops across Louisville, Halifax, Montreal, Ottawa, Toronto, Thunder Bay, Winnipeg, Edmonton, Calgary, and Vancouver.">
+    <meta name="description" content="Explore Sabaton's September–October 2026 Canada tour route – 10 stops across Halifax, Laval (Montreal), Ottawa, Toronto, Thunder Bay, Winnipeg, Edmonton, Calgary, and Vancouver.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Sabaton - Legends on Tour 2026 | Sep–Oct Map">
@@ -35,7 +35,7 @@
                 <div class="logo-area">
                     <span class="logo-sub">Legends on Tour</span>
                     <h1 class="logo-main">SABATON</h1>
-                    <span class="logo-date">Canada &amp; USA &bull; Sep–Oct 2026</span>
+                    <span class="logo-date">Canada &bull; Sep–Oct 2026</span>
                     <span class="tour-name-badge">🍁 The Canada Leg</span>
                 </div>
             </header>
@@ -43,11 +43,11 @@
             <!-- Stats -->
             <section class="stats-panel">
                 <div class="stat-box">
-                    <span class="stat-val" id="stat-shows">11</span>
+                    <span class="stat-val" id="stat-shows">10</span>
                     <span class="stat-lbl">Concerts</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-val" id="stat-cities">10</span>
+                    <span class="stat-val" id="stat-cities">9</span>
                     <span class="stat-lbl">Cities</span>
                 </div>
                 <div class="stat-box">
@@ -83,11 +83,6 @@
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                     <input type="text" id="search-input" placeholder="Search city or venue...">
                 </div>
-                <div class="country-tabs" id="country-tabs">
-                    <span class="country-tab active" data-country="">All</span>
-                    <span class="country-tab usa-tab" data-country="United States">🇺🇸 USA</span>
-                    <span class="country-tab canada-tab" data-country="Canada">🍁 Canada</span>
-                </div>
                 <div class="filter-controls">
                     <button id="btn-reset-filters" class="btn btn-secondary btn-icon" title="Reset Filters">
                         <i class="fa-solid fa-undo"></i>
@@ -101,15 +96,15 @@
                     <i class="fa-solid fa-route yellow-text"></i>
                     <h2>Open Tour in Google Maps</h2>
                 </div>
-                <p class="section-desc">11 stops split into 2 driving legs for Google Maps:</p>
+                <p class="section-desc">10 stops split into 2 driving legs for Google Maps:</p>
                 <div class="route-links">
-                    <a href="https://www.google.com/maps/dir/Louisville,+KY/Halifax,+Nova+Scotia/Laval,+Quebec/Ottawa,+Ontario/Toronto,+Ontario/Thunder+Bay,+Ontario"
+                    <a href="https://www.google.com/maps/dir/Halifax,+Nova+Scotia/Laval,+Quebec/Ottawa,+Ontario/Toronto,+Ontario/Thunder+Bay,+Ontario"
                        target="_blank" class="btn-route-link" id="google-route-leg1">
-                        <i class="fa-solid fa-map-location-dot"></i> Leg 1: Louisville → Thunder Bay (Stops 1–6)
+                        <i class="fa-solid fa-map-location-dot"></i> Leg 1: Halifax → Thunder Bay (Stops 1–5)
                     </a>
                     <a href="https://www.google.com/maps/dir/Thunder+Bay,+Ontario/Winnipeg,+Manitoba/Edmonton,+Alberta/Calgary,+Alberta/Vancouver,+British+Columbia"
                        target="_blank" class="btn-route-link" id="google-route-leg2">
-                        <i class="fa-solid fa-map-location-dot"></i> Leg 2: Thunder Bay → Vancouver (Stops 6–11)
+                        <i class="fa-solid fa-map-location-dot"></i> Leg 2: Thunder Bay → Vancouver (Stops 5–10)
                     </a>
                 </div>
             </section>
@@ -118,7 +113,7 @@
             <div class="tour-list-container">
                 <div class="tour-list-header">
                     <span>Chronological Schedule</span>
-                    <span id="filtered-count" class="count-badge">11 shows</span>
+                    <span id="filtered-count" class="count-badge">10 shows</span>
                 </div>
                 <div id="tour-list" class="tour-list">
                     <!-- Populated dynamically -->
@@ -134,10 +129,6 @@
             <div class="map-overlay-card">
                 <h3>Legends on Tour 2026</h3>
                 <div class="legend-items">
-                    <div class="legend-item">
-                        <span class="legend-dot usa-dot"></span>
-                        <span>USA Stop (Louisville)</span>
-                    </div>
                     <div class="legend-item">
                         <span class="legend-dot canada-dot"></span>
                         <span>Canada Stops</span>
