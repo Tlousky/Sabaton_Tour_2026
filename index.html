@@ -125,11 +125,19 @@
             box-shadow: 0 0 15px var(--color-maple-glow);
         }
 
+        .tab-btn.active[data-tab="canada"] i {
+            color: #fff !important;
+        }
+
         .tab-btn.active[data-tab="usa"] {
             color: #000;
             background: linear-gradient(135deg, var(--color-gold) 0%, #c9960a 100%);
             border-color: var(--color-gold);
             box-shadow: 0 0 15px var(--color-gold-glow);
+        }
+
+        .tab-btn.active[data-tab="usa"] i {
+            color: #000 !important;
         }
 
         /* Content Area */
@@ -215,25 +223,25 @@
             <span class="brand-subtitle">Legends on Tour 2026</span>
         </div>
         <div class="tabs-container">
-            <button class="tab-btn active" data-tab="canada">
-                <i class="fa-solid fa-leaf" style="color: #ff5a5a;"></i> Canada Leg
-            </button>
-            <button class="tab-btn" data-tab="usa">
+            <button class="tab-btn active" data-tab="usa">
                 <i class="fa-solid fa-star" style="color: #ffcc00;"></i> USA Leg
+            </button>
+            <button class="tab-btn" data-tab="canada">
+                <i class="fa-solid fa-leaf" style="color: #ff5a5a;"></i> Canada Leg
             </button>
         </div>
     </header>
 
     <!-- Main Content Panels -->
     <main class="content-container">
-        <!-- Canada Tab Content -->
-        <div class="tab-panel active" id="panel-canada">
-            <iframe src="sabaton-tour-map-CANADA/index.html"></iframe>
+        <!-- USA Tab Content (Default) -->
+        <div class="tab-panel active" id="panel-usa">
+            <iframe src="sabaton-tour-map-USA/index.html"></iframe>
         </div>
 
-        <!-- USA Tab Content -->
-        <div class="tab-panel" id="panel-usa">
-            <iframe src="sabaton-tour-map-USA/index.html"></iframe>
+        <!-- Canada Tab Content -->
+        <div class="tab-panel" id="panel-canada">
+            <iframe src="sabaton-tour-map-CANADA/index.html"></iframe>
         </div>
     </main>
 
@@ -273,8 +281,16 @@
             btn.addEventListener('click', () => {
                 const tabId = btn.getAttribute('data-tab');
                 switchTab(tabId);
+                history.replaceState(null, '', '#' + tabId);
             });
         });
+
+        // Allow URL hash override, e.g. #canada, defaulting to USA
+        if (window.location.hash === '#canada') {
+            switchTab('canada');
+        } else if (window.location.hash === '#usa') {
+            switchTab('usa');
+        }
     </script>
 </body>
 </html>
